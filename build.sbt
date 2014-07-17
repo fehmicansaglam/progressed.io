@@ -32,6 +32,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV)
 }
 
+assemblySettings
+
 seq(Revolver.settings: _*)
 
 scalariformSettings
