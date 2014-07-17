@@ -1,6 +1,8 @@
 import scalariform.formatter.preferences._
 
-organization  := "me.ilerleme"
+name          := "ilerle.me"
+
+organization  := "me.ilerle"
 
 version       := "0.1-SNAPSHOT"
 
