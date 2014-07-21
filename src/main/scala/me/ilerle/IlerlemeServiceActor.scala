@@ -62,12 +62,5 @@ trait IlerlemeService extends HttpService {
           }
         }
       }
-    } ~
-      path("ping") {
-        get {
-          complete {
-            "pong"
-          }
-        }
-      }
+    } 
 }
