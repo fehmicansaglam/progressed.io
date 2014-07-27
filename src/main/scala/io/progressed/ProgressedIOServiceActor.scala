@@ -25,7 +25,7 @@ class ProgressedIOServiceActor extends Actor with ProgressedIOService {
 trait ProgressedIOService extends HttpService {
 
   def getSvg(progress: Int, title: Option[String]) = {
-    val titleWidth = title.map(t => s"$t".length * 7).getOrElse(0)
+    val titleWidth = title.map(t => s"$t".length * 6 + 10).getOrElse(0)
     val progressWidth = if (title.isDefined) 60.0 else 90.0
     val totalWidth = titleWidth + progressWidth
     val width = progressWidth * progress / 100.0
