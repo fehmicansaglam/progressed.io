@@ -13,5 +13,5 @@ object Boot extends App {
   val service = system.actorOf(Props[ProgressedIOServiceActor], "progressed-io-service")
 
   // start a new HTTP server on port 80 with our service actor as the handler
-  IO(Http) ! Http.Bind(service, interface = "0.0.0.0", port = 8000)
+  IO(Http) ! Http.Bind(service, interface = "0.0.0.0", port = 80)
 }
