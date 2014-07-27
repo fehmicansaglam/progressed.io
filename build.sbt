@@ -1,12 +1,12 @@
 import scalariform.formatter.preferences._
 
-name          := "ilerle.me"
+name          := "progressed.io"
 
-organization  := "me.ilerle"
+organization  := "io.progressed"
 
 version       := "0.1-SNAPSHOT"
 
-scalaVersion  := "2.11.1"
+scalaVersion  := "2.11.2"
 
 scalacOptions := Seq(
     "-unchecked",
