@@ -1,4 +1,4 @@
-# progressed.io
+# What is progressed.io?
 
 http://progressed.io/bar/29
 ![Progress](http://progressed.io/bar/29)   
@@ -18,7 +18,7 @@ http://progressed.io/bar/89
 http://progressed.io/bar/89?title=done
 ![Progress](http://progressed.io/bar/89?title=done)   
 
-## Who is using progressed.io?
+# Who is using progressed.io?
 
 https://github.com/stringparser/gulp-runtime
 
