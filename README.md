@@ -20,7 +20,11 @@ http://progressed.io/bar/89?title=done
 
 # Who is using progressed.io?
 
+https://github.com/f/wolves
+
 https://github.com/stringparser/gulp-runtime
+
+https://github.com/PlayFrameworkTR/translation-project
 
 *If you want to be listed here please send a PR.*
 
