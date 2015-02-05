@@ -6,7 +6,7 @@ organization  := "io.progressed"
 
 version       := "0.1-SNAPSHOT"
 
-scalaVersion  := "2.11.2"
+scalaVersion  := "2.11.5"
 
 scalacOptions := Seq(
     "-unchecked",
@@ -34,7 +34,7 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV)
 }
 
-assemblySettings
+assemblyJarName in assembly := "progressed.io.jar"
 
 seq(Revolver.settings: _*)
 
