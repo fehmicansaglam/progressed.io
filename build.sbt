@@ -26,12 +26,10 @@ libraryDependencies ++= {
   val sprayV = "1.3.2"
   Seq(
     "org.scala-lang.modules" %% "scala-xml" % "1.0.3",
+    "com.typesafe.akka" %% "akka-actor" % akkaV,
     "io.spray" %% "spray-can" % sprayV,
     "io.spray" %% "spray-routing" % sprayV,
-    "io.spray" %% "spray-caching" % sprayV,
-    "io.spray" %% "spray-testkit" % sprayV,
-    "com.typesafe.akka" %% "akka-actor" % akkaV,
-    "com.typesafe.akka" %% "akka-testkit" % akkaV)
+    "io.spray" %% "spray-caching" % sprayV)
 }
 
 assemblyJarName in assembly := "progressed.io.jar"

@@ -46,13 +46,13 @@ trait ProgressedIOService extends HttpService {
       <rect rx="4" x={ s"$titleWidth" } width={ s"$width" } height="20" fill={ color }/>
       {
         if (title.isDefined) {
-          <path fill={ color } d={ s"M${titleWidth} 0h4v18h-4z" }/>
+          <path fill={ color } d={ s"M${titleWidth} 0h4v20h-4z" }/>
         }
       }
       <rect rx="4" width={ s"$totalWidth" } height="20" fill="url(#a)"/>
       <g fill="#fff" text-anchor="left" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-        <text x="4" y="14" fill="#010101" fill-opacity=".3">{ title.getOrElse("") }</text>
-        <text x="4" y="13">{ title.getOrElse("") }</text>
+        <text x="4" y="15" fill="#010101" fill-opacity=".3">{ title.getOrElse("") }</text>
+        <text x="4" y="14">{ title.getOrElse("") }</text>
       </g>
       <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
         <text x={ s"$progressX" } y="15" fill="#010101" fill-opacity=".3">{ progress }%</text>
