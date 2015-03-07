@@ -1,37 +1,37 @@
 import scalariform.formatter.preferences._
 
-name          := "progressed.io"
+name := "progressed.io"
 
-organization  := "io.progressed"
+organization := "io.progressed"
 
-version       := "0.1-SNAPSHOT"
+version := "0.1-SNAPSHOT"
 
-scalaVersion  := "2.11.5"
+scalaVersion := "2.11.6"
 
 scalacOptions := Seq(
-    "-unchecked",
-    "-deprecation",
-    "-encoding", "utf8",
-    "-feature",
-    "-language:higherKinds",
-    "-language:postfixOps",
-    "-language:implicitConversions",
-    "-language:existentials")
+  "-unchecked",
+  "-deprecation",
+  "-encoding", "utf8",
+  "-feature",
+  "-language:higherKinds",
+  "-language:postfixOps",
+  "-language:implicitConversions",
+  "-language:existentials")
 
 resolvers ++= Seq(
   "spray repo" at "http://repo.spray.io/")
 
 libraryDependencies ++= {
-  val akkaV = "2.3.2"
-  val sprayV = "1.3.1"
+  val akkaV = "2.3.9"
+  val sprayV = "1.3.2"
   Seq(
-    "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
-    "io.spray"            %%  "spray-can"     % sprayV,
-    "io.spray"            %%  "spray-routing" % sprayV,
-    "io.spray"            %%  "spray-caching" % sprayV,
-    "io.spray"            %%  "spray-testkit" % sprayV,
-    "com.typesafe.akka"   %%  "akka-actor"    % akkaV,
-    "com.typesafe.akka"   %%  "akka-testkit"  % akkaV)
+    "org.scala-lang.modules" %% "scala-xml" % "1.0.3",
+    "io.spray" %% "spray-can" % sprayV,
+    "io.spray" %% "spray-routing" % sprayV,
+    "io.spray" %% "spray-caching" % sprayV,
+    "io.spray" %% "spray-testkit" % sprayV,
+    "com.typesafe.akka" %% "akka-actor" % akkaV,
+    "com.typesafe.akka" %% "akka-testkit" % akkaV)
 }
 
 assemblyJarName in assembly := "progressed.io.jar"

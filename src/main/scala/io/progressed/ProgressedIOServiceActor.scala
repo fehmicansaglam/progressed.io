@@ -36,29 +36,27 @@ trait ProgressedIOService extends HttpService {
       case _ => "#5cb85c"
     }
 
-    <svg xmlns="http://www.w3.org/2000/svg" width={ s"$totalWidth" } height="18">
+    <svg xmlns="http://www.w3.org/2000/svg" width={ s"$totalWidth" } height="20">
       <linearGradient id="a" x2="0" y2="100%">
-        <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
-        <stop offset=".1" stop-color="#aaa" stop-opacity=".1"/>
-        <stop offset=".9" stop-opacity=".3"/>
-        <stop offset="1" stop-opacity=".5"/>
+        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+        <stop offset="1" stop-opacity=".1"/>
       </linearGradient>
-      <rect rx="4" x="0" width={ s"$totalWidth" } height="18" fill="#428bca"/>
-      <rect rx="4" x={ s"$titleWidth" } width={ s"$progressWidth" } height="18" fill="#555"/>
-      <rect rx="4" x={ s"$titleWidth" } width={ s"$width" } height="18" fill={ color }/>
+      <rect rx="4" x="0" width={ s"$totalWidth" } height="20" fill="#428bca"/>
+      <rect rx="4" x={ s"$titleWidth" } width={ s"$progressWidth" } height="20" fill="#555"/>
+      <rect rx="4" x={ s"$titleWidth" } width={ s"$width" } height="20" fill={ color }/>
       {
         if (title.isDefined) {
           <path fill={ color } d={ s"M${titleWidth} 0h4v18h-4z" }/>
         }
       }
-      <rect rx="4" width={ s"$totalWidth" } height="18" fill="url(#a)"/>
+      <rect rx="4" width={ s"$totalWidth" } height="20" fill="url(#a)"/>
       <g fill="#fff" text-anchor="left" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-        <text x="4" y="13" fill="#010101" fill-opacity=".3">{ title.getOrElse("") }</text>
-        <text x="4" y="12">{ title.getOrElse("") }</text>
+        <text x="4" y="14" fill="#010101" fill-opacity=".3">{ title.getOrElse("") }</text>
+        <text x="4" y="13">{ title.getOrElse("") }</text>
       </g>
       <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-        <text x={ s"$progressX" } y="14" fill="#010101" fill-opacity=".3">{ progress }%</text>
-        <text x={ s"$progressX" } y="13">{ progress }%</text>
+        <text x={ s"$progressX" } y="15" fill="#010101" fill-opacity=".3">{ progress }%</text>
+        <text x={ s"$progressX" } y="14">{ progress }%</text>
       </g>
     </svg>
   }
