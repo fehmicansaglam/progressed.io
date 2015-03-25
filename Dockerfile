@@ -1,7 +1,7 @@
 # progressed.io Docker image
 # VERSION 1.0
 
-FROM dockerfile/java:oracle-java8
+FROM java:8
 
 # that's me!
 MAINTAINER Fehmi Can Saglam, fehmican.saglam@gmail.com
@@ -11,7 +11,7 @@ RUN mkdir /root/bin
 WORKDIR /root/bin
 
 RUN \
-  wget https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.7/sbt-launch.jar && \
+  wget https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.8/sbt-launch.jar && \
   echo 'SBT_OPTS="-Xms256M -Xmx384M -Xss1M -XX:+CMSClassUnloadingEnabled"' > sbt && \
   echo 'java $SBT_OPTS -jar `dirname $0`/sbt-launch.jar "$@"' >> sbt && \
   chmod u+x sbt
