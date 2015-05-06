@@ -2,7 +2,10 @@ package io.progressed
 
 import akka.actor.Actor
 import spray.http.MediaTypes._
+import spray.http._
 import spray.routing._
+
+import scala.concurrent.duration.Duration
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
@@ -43,7 +46,7 @@ trait ProgressedIOService extends HttpService {
       <rect rx="4" x={ s"$titleWidth" } width={ s"$width" } height="20" fill={ color }/>
       {
         if (title.isDefined) {
-          <path fill={ color } d={ s"M$titleWidth 0h4v20h-4z" }/>
+          <path fill={ color } d={ s"M${titleWidth} 0h4v20h-4z" }/>
         }
       }
       <rect rx="4" width={ s"$totalWidth" } height="20" fill="url(#a)"/>
@@ -78,12 +81,6 @@ trait ProgressedIOService extends HttpService {
         get {
           complete {
             "pong"
-          }
-        }
-      } ~ path("loaderio-d572144ed604738273a58ebe72fc4f4f.txt") {
-        get {
-          complete {
-            "loaderio-d572144ed604738273a58ebe72fc4f4f"
           }
         }
       }
