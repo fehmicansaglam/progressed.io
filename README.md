@@ -20,6 +20,9 @@ http://progressed.io/bar/91
 http://progressed.io/bar/91?title=done
 ![Progress](http://progressed.io/bar/91?title=done)   
 
+http://progressed.io/bar/3?scale=4&title=mark&suffix=X
+![Progress](http://progressed.io/bar/4?scale=5&title=mark&suffix=X)   
+
 # Who is using progressed.io?
 
 https://github.com/f/wolves

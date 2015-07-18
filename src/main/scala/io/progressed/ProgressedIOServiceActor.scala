@@ -21,15 +21,15 @@ class ProgressedIOServiceActor extends Actor with ProgressedIOService {
 // this trait defines our service behavior independently from the service actor
 trait ProgressedIOService extends HttpService {
 
-  def getSvg(progress: Int, title: Option[String], suffix: String) = {
+  def getSvg(progress: Int, scale: Int, title: Option[String], suffix: String) = {
     val titleWidth = title.map(t => s"$t".length * 6 + 10).getOrElse(0)
     val progressWidth = if (title.isDefined) 60.0 else 90.0
     val totalWidth = titleWidth + progressWidth
-    val width = progressWidth * progress / 100.0
+    val width = progressWidth * progress / scale
     val progressX = titleWidth + (progressWidth / 2)
-    val color: String = progress match {
-      case p if p < 30 => "#d9534f"
-      case p if p < 70 => "#f0ad4e"
+    val color: String = progress.toDouble/scale.toDouble match {
+      case p if p < 0.3 => "#d9534f"
+      case p if p < 0.7 => "#f0ad4e"
       case _ => "#5cb85c"
     }
 
@@ -64,14 +64,14 @@ trait ProgressedIOService extends HttpService {
 
   val myRoute =
     path("bar" / IntNumber) { progress =>
-      validate(progress >= 0 && progress <= 100, "progress must be [0-100]") {
+      validate(progress >= 0 && progress <= 999, "progress must be [0-999]") {
         get {
-          parameters('title ?, 'suffix ? "%") { (title, suffix) =>
+          parameters('scale.as[Int] ? 100, 'title ?, 'suffix ? "%") { (scale, title, suffix) =>
             validate(suffix.size == 1, "suffix size must be 1") {
               compressResponse() {
                 respondWithMediaType(`image/svg+xml`) {
                   complete {
-                    getSvg(progress, title, suffix)
+                    getSvg(progress, scale, title, suffix)
                   }
                 }
               }
