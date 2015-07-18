@@ -20,8 +20,8 @@ http://progressed.io/bar/91
 http://progressed.io/bar/91?title=done
 ![Progress](http://progressed.io/bar/91?title=done)   
 
-http://progressed.io/bar/3?scale=4&title=mark&suffix=X
-![Progress](http://progressed.io/bar/3?scale=4&title=mark&suffix=X)   
+http://progressed.io/bar/7?scale=10&title=mark&suffix=X
+![Progress](http://progressed.io/bar/7?scale=10&title=mark&suffix=X)   
 
 # Who is using progressed.io?
 
