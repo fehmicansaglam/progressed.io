@@ -35,6 +35,8 @@ https://github.com/MahdiZareie/PyShop
 
 https://github.com/johnRivs/wunderlist
 
+https://github.com/luizperes/status-projects
+
 *If you want to be listed here please send a PR.*
 
 
