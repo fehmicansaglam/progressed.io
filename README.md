@@ -39,6 +39,8 @@ https://github.com/luizperes/status-projects
 
 https://github.com/cgimenes/H-99
 
+https://github.com/ImminentFate/CompactGUI/
+
 *If you want to be listed here please send a PR.*
 
 
