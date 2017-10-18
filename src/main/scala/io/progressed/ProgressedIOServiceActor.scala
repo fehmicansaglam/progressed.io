@@ -64,7 +64,7 @@ trait ProgressedIOService extends HttpService {
 
   val myRoute =
     path("bar" / IntNumber) { progress =>
-      validate(progress >= 0 && progress <= 999, "progress must be [0-999]") {
+      validate(progress >= 0 && progress <= 99999, "progress must be [0-99999]") {
         get {
           parameters('scale.as[Int] ? 100, 'title ?, 'suffix ? "%") { (scale, title, suffix) =>
             validate(suffix.size == 1, "suffix size must be 1") {
