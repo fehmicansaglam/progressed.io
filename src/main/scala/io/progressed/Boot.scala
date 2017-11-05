@@ -1,17 +1,17 @@
 package io.progressed
 
-import akka.actor.{ ActorSystem, Props }
-import akka.io.IO
-import spray.can.Http
+import akka.actor.ActorSystem
+import akka.http.scaladsl.Http
+import akka.stream.ActorMaterializer
 
 object Boot extends App {
 
-  // we need an ActorSystem to host our application in
-  implicit val system = ActorSystem("progressed-io-system")
+  implicit val system: ActorSystem = ActorSystem("progressed-io-system")
+  implicit val mat: ActorMaterializer = ActorMaterializer()
 
   // create and start our service actor
-  val service = system.actorOf(Props[ProgressedIOServiceActor], "progressed-io-service")
+  val service = new ProgressedIOService
 
-  // start a new HTTP server on port 8080 with our service actor as the handler
-  IO(Http) ! Http.Bind(service, interface = "0.0.0.0", port = 8080)
+  Http().bindAndHandle(service.routes, "0.0.0.0", 8080)
+
 }
