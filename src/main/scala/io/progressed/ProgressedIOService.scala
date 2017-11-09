@@ -1,10 +1,15 @@
 package io.progressed
 
+import java.util.concurrent.TimeUnit
+
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.util.ByteString
+import com.codahale.metrics.json.MetricsModule
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.blemale.scaffeine.{LoadingCache, Scaffeine}
+import nl.grons.metrics.scala.{DefaultInstrumented, MetricName}
 
 import scala.xml.Elem
 
@@ -13,11 +18,17 @@ case class SvgParams(progress: Int, scale: Int, title: Option[String], suffix: S
   require(suffix.length == 1, "suffix size must be 1")
 }
 
-class ProgressedIOService {
+class ProgressedIOService extends DefaultInstrumented {
+
+  override lazy val metricBaseName = MetricName("")
+
+  private[this] val mapper = (new ObjectMapper)
+    .registerModule(new MetricsModule(TimeUnit.SECONDS, TimeUnit.MILLISECONDS, false))
+  private[this] val timer = metrics.timer("bar")
 
   private[this] val cache: LoadingCache[SvgParams, String] =
     Scaffeine()
-      .maximumSize(1000)
+      .maximumSize(100)
       .build((svgParams: SvgParams) => getSvg(svgParams).toString())
 
   private def getSvg(svgParams: SvgParams): Elem = {
@@ -67,8 +78,14 @@ class ProgressedIOService {
     (path("bar" / IntNumber) & parameters(('scale.?(100), 'title.?, 'suffix.?("%")))).as(SvgParams) { svgParams =>
       encodeResponse {
         complete {
-          HttpResponse(entity = HttpEntity(ContentType(MediaTypes.`image/svg+xml`), ByteString(cache.get(svgParams))))
+          timer.time {
+            HttpResponse(entity = HttpEntity(ContentType(MediaTypes.`image/svg+xml`), ByteString(cache.get(svgParams))))
+          }
         }
+      }
+    } ~ path("metrics") {
+      complete {
+        mapper.writeValueAsString(metricRegistry)
       }
     } ~
       path("ping") {
