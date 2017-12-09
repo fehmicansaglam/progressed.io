@@ -56,14 +56,13 @@ scalacOptions := Seq(
 
 libraryDependencies ++= {
   val scalaXmlV = "1.0.6"
-  val akkaHttpV = "10.0.10"
-  val scaffeineV = "2.3.0"
+  val akkaHttpV = "10.0.11"
   val metricsV = "3.5.9"
   val metricsJsonV = "3.2.2"
   Seq(
     "org.scala-lang.modules" %% "scala-xml" % scalaXmlV,
     "com.typesafe.akka" %% "akka-http" % akkaHttpV,
-    "com.github.blemale" %% "scaffeine" % scaffeineV,
+    "com.typesafe.akka" %% "akka-http-caching" % akkaHttpV,
     "nl.grons" %% "metrics-scala" % metricsV,
     "io.dropwizard.metrics" % "metrics-json" % metricsJsonV)
 }
