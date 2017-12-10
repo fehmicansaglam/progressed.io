@@ -6,7 +6,7 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.directives.CachingDirectives._
-import akka.http.scaladsl.server.{RequestContext, Route}
+import akka.http.scaladsl.server.{Directive0, RequestContext, Route}
 import akka.util.ByteString
 import com.codahale.metrics.json.MetricsModule
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -25,7 +25,6 @@ class ProgressedIOService(implicit system: ActorSystem) extends DefaultInstrumen
 
   private[this] val mapper = (new ObjectMapper)
     .registerModule(new MetricsModule(TimeUnit.SECONDS, TimeUnit.MILLISECONDS, false))
-  private[this] val timer = metrics.timer("bar")
 
   private def getSvg(svgParams: SvgParams): Elem = {
     import svgParams._
@@ -70,27 +69,47 @@ class ProgressedIOService(implicit system: ActorSystem) extends DefaultInstrumen
     </svg>
   }
 
-  val routes: Route = get {
-    (path("bar" / IntNumber) & parameters(('scale.?(100), 'title.?, 'suffix.?("%")))).as(SvgParams) { svgParams =>
-      timer.time {
+  val timed: Directive0 = {
+    extractRequest.flatMap { implicit request =>
+      val path = request.uri.path.toString.drop(1).replaceAll("/", ".")
+      val method = request.method.name
+
+      val startTime = System.currentTimeMillis()
+      mapResponse { response =>
+        val elapsed = System.currentTimeMillis() - startTime
+
+        metrics
+          .timer(s"response.${response.status.intValue()}.$method.$path")
+          .update(elapsed, TimeUnit.MILLISECONDS)
+
+        response
+      }
+    }
+  }
+
+  val routes: Route = timed {
+    get {
+      (path("bar" / IntNumber) & parameters(('scale.?(100), 'title.?, 'suffix.?("%")))).as(SvgParams) { svgParams =>
         encodeResponse {
-          alwaysCache(routeCache, keyer = { case r: RequestContext => r.request.uri }) {
+          alwaysCache(routeCache, keyer = {
+            case r: RequestContext => r.request.uri
+          }) {
             complete {
               HttpResponse(entity = HttpEntity(ContentType(MediaTypes.`image/svg+xml`), ByteString(getSvg(svgParams).toString())))
             }
           }
         }
-      }
-    } ~ path("metrics") {
-      complete {
-        mapper.writeValueAsString(metricRegistry)
-      }
-    } ~
-      path("ping") {
+      } ~ path("metrics") {
         complete {
-          "pong"
+          mapper.writeValueAsString(metricRegistry)
         }
-      }
+      } ~
+        path("ping") {
+          complete {
+            "pong"
+          }
+        }
+    }
   }
 
 }
