@@ -41,6 +41,8 @@ https://github.com/cgimenes/H-99
 
 https://github.com/ImminentFate/CompactGUI/
 
+https://github.com/IgrikXD/Easy-SDR
+
 *If you want to be listed here please send a PR.*
 
 
